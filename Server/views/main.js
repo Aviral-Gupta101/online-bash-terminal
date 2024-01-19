@@ -1,9 +1,6 @@
-import {io} from "socket.io-client";
-const socket = io("http://localhost:3000",  { transports: ['websocket', 'polling', 'flashsocket'] });
+const socket = io("http://localhost:3000")
+const term = new Terminal();
 
-console.log("JS loaded successfully")
-
-function onButtonClick(){
-    alert("hello")
-    socket.emit("message", "Message Sent");
-}
+socket.on("command-output", (data) => {
+    term.write(data);
+});
