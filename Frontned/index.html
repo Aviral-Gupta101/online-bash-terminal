@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="eu">
+    <head>
+        <link rel="stylesheet" href="node_modules/xterm/css/xterm.css"/>
+        <script src="node_modules/xterm/lib/xterm.js"></script>
+        <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+        <title></title>
+    </head>
+    <body>
+        <div id="terminal"></div>
+        <script src="main.js"></script>
+        <script>
+            term.open(document.getElementById('terminal'));
+            term.onData((data) => {
+                // console.log("emit: ", data)
+                // term.write(data);
+                socket.emit("execute-command", data);
+            });
+        </script>
+    </body>
+</html>
