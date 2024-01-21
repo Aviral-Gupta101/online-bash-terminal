@@ -8,22 +8,10 @@
     <title></title>
 </head>
 <body>
-<div id="terminal"></div>
-<!--<script src="main.js"></script>-->
-<script>
-    const socket = io("http://localhost:3000")
-    const term = new Terminal();
-
-    socket.on("command-output", (data) => {
-        term.write(data);
-    });
-
-    term.open(document.getElementById('terminal'));
-    term.onData((data) => {
-        // console.log("emit: ", data)
-        // term.write(data);
-        socket.emit("execute-command", data);
-    });
-</script>
+<div class="main">
+    Terminal
+    <div id="terminal"></div>
+</div>
+<script src="main.js"></script>
 </body>
 </html>

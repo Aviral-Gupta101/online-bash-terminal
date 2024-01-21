@@ -4,10 +4,12 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 
-const FRONTEND_PORT = 63342;
+// NOT REQUIRED ANY MORE, EXPOSING FRONTEND THROUGH SERVER
+// const FRONTEND_PORT = 63342;
 
+// Change Frontend Port For CORS Problem
 const io = new Server(server, {cors: {
-        origin: `http://localhost:${FRONTEND_PORT}`  // Change Frontend Port For CORS Problem
+        // origin: `http://localhost:${FRONTEND_PORT}`
     }});
 
 function startServer(portNumber) {
@@ -18,6 +20,8 @@ function startServer(portNumber) {
 }
 
 module.exports.server = server;
+module.exports.express = express;
 module.exports.io = io;
 module.exports.app = app;
+
 module.exports.startServer = startServer;
