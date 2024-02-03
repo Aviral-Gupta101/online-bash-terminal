@@ -1,21 +1,64 @@
-var socket = null;
+let socket = null;
 const term = new Terminal({cursorBlink: true});
 
 const successAlert = document.getElementById("alert-success");
 const dangerAlert = document.getElementById("alert-danger");
 const stopButton = document.getElementById("stop-button");
 const startButton = document.getElementById("start-button");
+const timer = document.getElementById("timer");
 
+function restartTimer(){
+    timer.innerText = "10:00";
+}
 function toggleStartButton(isOn){
+
+    const maxTime = 1000 * 60 * 10;
+    const startTime = Date.now();
+    const endTime = startTime + maxTime;
+
+    setTimeout(() => {
+        handleStop();
+    }, maxTime);
+
+    function updateTimer(endTime) {
+
+        let currentTime = Date.now();
+        let remainingTime = endTime - currentTime;
+
+        if (remainingTime <= 0) {
+            // Timer has expired
+            restartTimer();
+            console.log("Timer expired!");
+            if(timeInterval)
+                clearInterval(timeInterval);
+        } else {
+
+            // Convert remaining time to minutes and seconds
+            let minutes = Math.floor(remainingTime / (1000 * 60));
+            let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            if (minutes.toString().length === 1)
+                minutes = "0" + minutes.toString();
+            if (seconds.toString().length === 1)
+                seconds = "0" + seconds.toString();
+
+            timer.innerText = minutes + ":" + seconds;
+            console.log("Time Remaining: " + minutes + " minutes " + seconds + " seconds");
+        }
+    }
+
+    let timeInterval = null;
 
     if(isOn === undefined || isOn === null){
         console.log("isOn is undefined");
     }
     else if(isOn === true){
         startButton.classList.remove("disabled");
+
     }
     else if(isOn === false){
         startButton.classList.add("disabled");
+        timeInterval = setInterval(() => {updateTimer(endTime)}, 1000);
     }
 }
 
