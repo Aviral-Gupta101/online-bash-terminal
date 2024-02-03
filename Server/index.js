@@ -15,8 +15,5 @@ app.get('/', (req, res) => {
     return res.sendFile(join(__dirname, "/views/index.html"))
 });
 
-app.get("/route", (req, res) => {
-    app.get(".")
-});
 socketEventHandler()
 startServer()

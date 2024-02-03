@@ -1,15 +1,59 @@
 <!doctype html>
 <html lang="eu">
 <head>
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!--XTERM-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    <!--SOCKET-IO-->
     <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
 
     <title></title>
 </head>
 <body>
-<div class="main">
-    Terminal
+<div class="main mx-2 mb-4">
+    <div class="navbar d-flex" >
+        <a class="navbar-brand mx-3" href="/">
+            <img  src="https://banner2.cleanpng.com/20180419/vlw/kisspng-computer-icons-computer-terminal-cmd-exe-command-terminal-vector-5ad8d746e47909.1917562115241603269358.jpg" alt="Bootstrap" width="50" height="60">
+            Terminal
+        </a>
+
+        <div class="nav-buttons">
+            <button type="button" class="btn btn-success" id="start-button" onclick="handleStart()">Start</button>
+            <button type="button" class="btn btn-danger disabled mx-2" id="stop-button" onclick="handleStop()">Stop</button>
+            <div class="btn btn-outline-primary disabled" style="margin-right: 15px" >30:00</div>
+        </div>
+    </div>
+    <br>
+<!--    <h1 class="display-4" style="font-size: 35px">About Online Terminal</h1>-->
+    <div style="position: absolute; width: 100%">
+        <div id="alert-success" class="alert alert-success d-none" role="alert" style="display: inline; float: right; bottom: 20px; margin-right: 30px">
+            Terminal Started Successfully
+        </div>
+        <div id="alert-danger" class="alert alert-danger d-none" role="alert" style="display: inline; float: right; bottom: 20px; margin-right: 30px">
+            Terminal Stopped Successfully
+        </div>
+    </div>
+    <p class="h3">About Online Terminal</p>
+
+    <p class="lead">
+        This is a bash terminal, running on an ubuntu-bullseye docker image, just like the bash terminal in ubuntu OS you would
+        be able to use this but some command like <b><i>sudo</i></b>, <b><i>vim</i></b>  won't work here, some of the many
+        unavailable packages can be downloaded.
+        <br>
+        <br>
+        To start the terminal click on the <span style="color: blue"><b><i>start</i></b></span> button on the top of navbar, you
+        will get 30 mins to use it, after it will close the connection itself.
+        <br>
+
+        If you want to <span style="color: red"><b><i>stop</i></b></span> terminal before 30 mins, you can click on the stop button for that on navbar.
+        <br><br>
+        <b style="font-family: sans-serif; color: red">Note:-</b>
+        <span style="color: darkblue">Any file that you download, edit, modify will be lost after session has expired.</span>
+    </p>
+    <br>
     <div id="terminal"></div>
 </div>
 <script src="main.js"></script>
